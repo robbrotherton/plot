@@ -36,14 +36,14 @@ library(plot)
 # It's a triangle
 
 df <- data.frame(x = c(10, 100, 200, 10),
-                 y = c(60, 230, 60, 60))
+                 y = c(70, 220, 70, 70))
 ```
 
 Let’s see how it might look in a frame.
 
 ``` r
 
-frame(df)
+frame(df, matt_size = "8x10")
 #> No group variable present.
 ```
 
@@ -54,7 +54,7 @@ Now we can turn the data into g-code to use with the pen plotter.
 ``` r
 
 plotting_time(df)
-#> [1] 00:00:48
+#> [1] 00:00:46
 ```
 
 ``` r
