@@ -1,0 +1,65 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# plot
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+This is an R package I use to help make pen-plotter art using R. Since my pen plotter uses G-code, the package has some function to turn a dataframe containing cartesian coordinates into G-code for plotting. It also includes functions to help preview art before plotting.
+
+## Installation
+
+You can install the development version of plot from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("robbrotherton/plot")
+```
+
+## Example
+
+Let's make some art.
+
+```{r}
+library(plot)
+
+# It's a triangle
+
+df <- data.frame(x = c(10, 100, 200, 10),
+                 y = c(60, 230, 60, 60))
+
+```
+
+Let's see how it might look in a frame.
+
+```{r}
+
+frame(df)
+
+```
+
+Now we can turn the data into g-code to use with the pen plotter.
+
+```{r}
+
+plotting_time(df)
+
+```
+
+```{r, eval = FALSE}
+write_gcode(df, filename = here::here("test.gcode"))
+
+```
