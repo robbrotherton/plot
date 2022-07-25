@@ -1,3 +1,18 @@
+#' Title
+#'
+#' @param df
+#' @param paper_size
+#' @param frame_size
+#' @param frame_depth
+#' @param matt_size
+#' @param matt_color
+#' @param frame_color
+#' @param show_paper_edges
+#'
+#' @return
+#' @export
+#'
+#' @examples
 frame <- function(df,
                   paper_size = "A4",
                   frame_size = "11x14",

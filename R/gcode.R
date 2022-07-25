@@ -1,3 +1,13 @@
+#' Title
+#'
+#' @param data
+#' @param filename
+#' @param pic
+#'
+#' @return
+#' @export
+#'
+#' @examples
 write_gcode <- function(data, filename, pic = NULL) {
 
   time <- plotting_time(data)
@@ -66,6 +76,15 @@ write_gcode <- function(data, filename, pic = NULL) {
 }
 
 
+#' Title
+#'
+#' @param file
+#' @param animate
+#'
+#' @return
+#' @export
+#'
+#' @examples
 read_gcode <- function(file, animate = FALSE) {
 
   data <- read.delim(file, col.names = "text") |>
@@ -92,6 +111,15 @@ read_gcode <- function(file, animate = FALSE) {
 }
 
 
+#' Title
+#'
+#' @param df
+#' @param plotter_speed
+#'
+#' @return
+#' @export
+#'
+#' @examples
 plotting_time <- function(df, plotter_speed = 800) {
 
   # group by colors
@@ -126,6 +154,17 @@ plotting_time <- function(df, plotter_speed = 800) {
 
 
 
+#' Title
+#'
+#' @param df
+#' @param paper_width
+#' @param paper_height
+#' @param max_dim
+#'
+#' @return
+#' @export
+#'
+#' @examples
 resize_for_plotter <- function(df,
                                paper_width = 210, paper_height = 297,
                                # max_width = paper_width*.9,
@@ -151,16 +190,16 @@ resize_for_plotter <- function(df,
 
   # scale to max dim
   df <- df |>
-    mutate(x = scale(x, center = 0, scale = 1/ratio),
-           y = scale(y, center = 0, scale = 1/ratio))
+    dplyr::mutate(x = scale(x, center = 0, scale = 1/ratio),
+                  y = scale(y, center = 0, scale = 1/ratio))
 
   # now nudge so min values are 0,0
   nudge_x <- min(df$x)
   nudge_y <- min(df$y)
 
   df <- df |>
-    mutate(x = x - nudge_x,
-           y = y - nudge_y)
+    dplyr::mutate(x = x - nudge_x,
+                  y = y - nudge_y)
   # df <- df |>
   #   mutate(x = x * ratio,
   #          # x = x - min(x),
@@ -177,8 +216,8 @@ resize_for_plotter <- function(df,
   page_center_y <- paper_height/2
   # print(y_center)
   df <- df |>
-    mutate(x = x - (image_center_x - page_center_x),
-           y = y - (image_center_y - page_center_y)
+    dplyr::mutate(x = x - (image_center_x - page_center_x),
+                  y = y - (image_center_y - page_center_y)
     )
 
   # include a check here for out-of-bounds X and Y values
