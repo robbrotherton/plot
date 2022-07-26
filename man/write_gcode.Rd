@@ -2,16 +2,23 @@
 % Please edit documentation in R/gcode.R
 \name{write_gcode}
 \alias{write_gcode}
-\title{Title}
+\title{Write a g-code file from a data frame of coordinates}
 \usage{
 write_gcode(data, filename, pic = NULL)
 }
 \arguments{
-\item{pic}{}
+\item{data}{The input data. This should be a data frame containing x and y
+columns and a group column. If a color column is also present multiple g-code
+files will be written, one for each color group.}
+
+\item{filename}{The filename of the resulting g-code file(s)}
+
+\item{pic}{Optionally supply a ggplot2 object and it will be saved
+alongside the g-code file}
 }
 \value{
 
 }
 \description{
-Title
+Write a g-code file from a data frame of coordinates
 }

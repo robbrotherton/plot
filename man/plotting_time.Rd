@@ -2,16 +2,19 @@
 % Please edit documentation in R/gcode.R
 \name{plotting_time}
 \alias{plotting_time}
-\title{Title}
+\title{Determine approximate plotting time from a data.frame}
 \usage{
 plotting_time(df, plotter_speed = 800)
 }
 \arguments{
-\item{plotter_speed}{}
+\item{df}{A data.frame or tibble containing x and y coordinates and
+optionally a group column}
+
+\item{plotter_speed}{The drawing speed of the pen plotter, in millimeters per second}
 }
 \value{
-
+The approximate plotting time (HH:MM:SS)
 }
 \description{
-Title
+Determine approximate plotting time from a data.frame
 }

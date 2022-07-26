@@ -2,7 +2,7 @@
 % Please edit documentation in R/frame.R
 \name{frame}
 \alias{frame}
-\title{Title}
+\title{See how a piece will look when framed}
 \usage{
 frame(
   df,
@@ -16,11 +16,30 @@ frame(
 )
 }
 \arguments{
-\item{show_paper_edges}{}
+\item{df}{A data frame of coordinates (and optionally grouping and color
+columns)}
+
+\item{paper_size}{String specifying the size of paper used for plotting,
+either in inches (e.g. "5x7") or one of "letter", "A4", "A3".}
+
+\item{frame_size}{String specifying the size of the frame in inches (e.g.
+"11x14")}
+
+\item{frame_depth}{The thickness of the frame, in inches}
+
+\item{matt_size}{Optional string specifying the size of size of the frame in
+inches (e.g. "8x10")}
+
+\item{matt_color}{Color of the matt}
+
+\item{frame_color}{Color of the frame}
+
+\item{show_paper_edges}{Logical; show red overlay where the edges of the
+paper are}
 }
 \value{
-
+A ggplot object
 }
 \description{
-Title
+See how a piece will look when framed
 }

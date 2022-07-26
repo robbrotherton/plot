@@ -1,8 +1,11 @@
-#' Title
+#' Write a g-code file from a data frame of coordinates
 #'
-#' @param data
-#' @param filename
-#' @param pic
+#' @param data The input data. This should be a data frame containing x and y
+#' columns and a group column. If a color column is also present multiple g-code
+#' files will be written, one for each color group.
+#' @param filename The filename of the resulting g-code file(s)
+#' @param pic Optionally supply a ggplot2 object and it will be saved
+#' alongside the g-code file
 #'
 #' @return
 #' @export
@@ -11,8 +14,13 @@
 write_gcode <- function(data, filename, pic = NULL) {
 
   time <- plotting_time(data)
-  # include a check here for out-of-bounds X and Y values
-  if(min(data$x) < 0 | min(data$y) < 0 | max(data$x) > 215 | max(data$y) > 300) warning("out of bounds")
+
+  if(min(data$x) < 0 |
+     min(data$y) < 0 |
+     max(data$x) > 215 |
+     max(data$y) > 300) {
+    warning("out of bounds")
+  }
 
 
   start <- "M280P0S30\nG90 G21"
@@ -21,7 +29,6 @@ write_gcode <- function(data, filename, pic = NULL) {
   finish <- "G1 X0 Y0"
 
   if(!is.null(data$color)) {
-
     filestem <- gsub(".gcode", "", filename)
     colors <- unique(data$color)
     print(colors)
@@ -76,16 +83,15 @@ write_gcode <- function(data, filename, pic = NULL) {
 }
 
 
-#' Title
+#' Read a g-code file into a data.frame
 #'
-#' @param file
-#' @param animate
+#' @param file A path to a g-code file
 #'
-#' @return
+#' @return A data.frame with columns for x, y, and grouping variable.
 #' @export
 #'
 #' @examples
-read_gcode <- function(file, animate = FALSE) {
+read_gcode <- function(file) {
 
   data <- read.delim(file, col.names = "text") |>
     dplyr::filter(stringr::str_detect(text, "G1 X") |
@@ -111,12 +117,13 @@ read_gcode <- function(file, animate = FALSE) {
 }
 
 
-#' Title
+#' Determine approximate plotting time from a data.frame
 #'
-#' @param df
-#' @param plotter_speed
+#' @param df A data.frame or tibble containing x and y coordinates and
+#' optionally a group column
+#' @param plotter_speed The drawing speed of the pen plotter, in millimeters per second
 #'
-#' @return
+#' @return The approximate plotting time (HH:MM:SS)
 #' @export
 #'
 #' @examples

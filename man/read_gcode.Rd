@@ -2,16 +2,16 @@
 % Please edit documentation in R/gcode.R
 \name{read_gcode}
 \alias{read_gcode}
-\title{Title}
+\title{Read a g-code file into a data.frame}
 \usage{
-read_gcode(file, animate = FALSE)
+read_gcode(file)
 }
 \arguments{
-\item{animate}{}
+\item{file}{A path to a g-code file}
 }
 \value{
-
+A data.frame with columns for x, y, and grouping variable.
 }
 \description{
-Title
+Read a g-code file into a data.frame
 }
